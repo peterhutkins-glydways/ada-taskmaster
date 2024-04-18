@@ -9,7 +9,6 @@ Creates a binary in the `bin` directory
 ```
 alr build
 ```
-The first time you build, the toolchain assistant may ask you about your toolchain.  For now, pick the defaults. 
 
 ### Run
 Will also rebuild, if necessary. 
