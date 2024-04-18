@@ -1,0 +1,10 @@
+name = "taskmaster"
+description = "example tasking framework"
+version = "0.1.0-dev"
+
+authors = ["Peter Hutkins"]
+maintainers = ["Peter Hutkins <peter.hutkins@glydways.com>"]
+maintainers-logins = ["peterhutkins-glydways"]
+licenses = "MIT OR Apache-2.0 WITH LLVM-exception"
+website = ""
+tags = []
