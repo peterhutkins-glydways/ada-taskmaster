@@ -5,10 +5,11 @@
 - Either add the created bin directory to your path, or move the `alr` binary into somewhere already on your path
 
 ## Compile
+Creates a binary in the `bin` directory
 ```
 alr build
 ```
-creates a binary in the `bin` directory
+The first time you build, the toolchain assistant may ask you about your toolchain.  For now, pick the defaults. 
 
 ### Run
 Will also rebuild, if necessary. 
