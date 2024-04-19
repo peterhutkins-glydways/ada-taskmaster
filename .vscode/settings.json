@@ -1,0 +1,10 @@
+{
+    "editor.tabSize": 3,
+    "editor.defaultFormatter": null,
+    "[ada]": {
+        "editor.formatOnType": true,
+        "diffEditor.ignoreTrimWhitespace": true,
+        "files.trimTrailingWhitespace": true,
+        "files.trimFinalNewlines": true
+    }
+}

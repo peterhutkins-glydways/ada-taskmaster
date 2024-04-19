@@ -5,6 +5,10 @@
     }
   ],
   "settings": {
-    "ada.projectFile": "taskmaster.gpr"
+    "ada.projectFile": "taskmaster.gpr",
+    "[ada]": {
+      "files.trimTrailingWhitespace": true,
+      "files.trimFinalNewlines": true
+    }
   }
 }
