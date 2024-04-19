@@ -1,4 +1,4 @@
--- Triggers.adb
+--  Triggers.adb
 package body Triggers is
    protected body Task_Trigger is
       procedure Activate is

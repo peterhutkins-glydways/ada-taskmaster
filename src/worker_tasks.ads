@@ -13,8 +13,7 @@ package Worker_Tasks is
       Init_Callable     : Procedure_Access := null;
       Triggered_Callable : Procedure_Access := null;
       Trigger           : access Triggers.Task_Trigger;
-      Timeout           : Ada.Real_Time.Time_Span :=
-                           Ada.Real_Time.Seconds (10);
+      Timeout           : Ada.Real_Time.Time_Span;
    end record;
 
    type Worker_Config_Access is access constant Worker_Config;
