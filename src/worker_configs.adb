@@ -15,6 +15,9 @@ package body Worker_Configs is
          Timeout => Timeout);
    end Create_Config;
 
+   --  This annoying list of accessor functions is necessary because the
+   --  langauge needs to be explicit.
+   --  Each accessor uses the pragma Inline to encourage the compiler to inline.
    function Get_Name (Config : Worker_Config) return String is
    begin
       return To_String (Config.Name);
