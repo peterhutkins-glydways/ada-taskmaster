@@ -5,6 +5,7 @@ with Task_Manager; use Task_Manager;
 
 procedure Taskmaster is
 begin
+   Put_Line ("This is the first line from Ada.");
 
    Task_Manager.Task1_Trigger.Activate;
 

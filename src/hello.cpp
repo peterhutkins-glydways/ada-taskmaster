@@ -12,7 +12,7 @@ void HelloWorld::say_hello() const {
 }
 
 HelloWorld& HelloWorld::Instance() {
-    static HelloWorld instance;  // Instantiated the first time it's needed
+    static HelloWorld instance;
     return instance;
 }
 
