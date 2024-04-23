@@ -17,7 +17,7 @@ package body Worker_Configs is
 
    --  This annoying list of accessor functions is necessary because the
    --  langauge needs to be explicit.
-   --  Each accessor uses the pragma Inline to encourage the compiler to inline.
+   --  Each accessor uses the pragma Inline for efficiency.
    function Get_Name (Config : Worker_Config) return String is
    begin
       return To_String (Config.Name);
