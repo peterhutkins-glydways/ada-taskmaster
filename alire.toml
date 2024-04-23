@@ -8,3 +8,6 @@ maintainers-logins = ["peterhutkins-glydways"]
 licenses = "MIT OR Apache-2.0 WITH LLVM-exception"
 website = ""
 tags = []
+
+[[depends-on]]
+gnatprove = "^13.2.1"
