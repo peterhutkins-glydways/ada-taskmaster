@@ -1,5 +1,7 @@
 --  Worker_Configs.adb
-package body Worker_Configs is
+package body Worker_Configs
+--   with SPARK_Mode
+is
    function Create_Config
      (Name : String;
       Init_Callable : Procedure_Access := null;

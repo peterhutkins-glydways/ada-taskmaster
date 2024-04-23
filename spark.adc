@@ -1,0 +1,32 @@
+--   spark.adc
+--   This is where we define all of the pragrams required for formal proof via SPARK analysis.
+--
+--   SPARK analysis can give strong guarantees that a program:
+--      * does not read uninitialized data,
+--      * accesses global data only as intended,
+--      * does not contain concurrency errors (deadlocks and data races),
+--      * does not contain run-time errors (e.g., division by zero or buffer overflow),
+--        except for Storage_Error, which is not covered by SPARK analysis
+--      * respects key integrity properties (e.g., interaction between components or global invariants),
+--      * is a correct implementation of software requirements expressed as contracts.
+--
+--   The formal proof is done in the Spark language, which is a subset of Ada.
+--   Turn on the following pragma to run SPARK mode on all objects in the project.
+--   Alternatively, you can turn on SPARK mode for individual files by adding the following pragma to the file:
+-- pragma SPARK_Mode (On);
+
+--   The Ravenscar profile is a subset of the Ada concurrency facilities that supports determinism,
+--   schedulability analysis, constrained memory utilization, and certification to the highest
+--   integrity levels. Four distinct application domains are intended:
+--      * hard real-time applications requiring predictability,
+--      * safety-critical systems requiring formal, stringent certification,
+--      * high-integrity applications requiring formal static analysis and verification,
+--      * embedded applications requiring both a small memory footprint and low execution overhead.
+--   See: https://ada-lang.io/docs/arm/AA-D/AA-D.13/
+pragma Profile (Ravenscar);
+
+--   Parition_Elaboration_Policy (Sequential)
+--   Concurrency in SPARK also requires that tasks do not start executing before the program has
+--   been completely elaborated.
+--   See: https://ada-lang.io/docs/arm/AA-H/AA-H.6/
+pragma Partition_Elaboration_Policy (Sequential);

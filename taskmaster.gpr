@@ -1,6 +1,10 @@
 with "config/taskmaster_config.gpr";
 project Taskmaster is
 
+   --   Allows different build profiles to be used for different tools
+   Mode := External ("GPR_TOOL", "");
+
+
    for Source_Dirs use ("src/", "config/");
    for Object_Dir use "obj/" & Taskmaster_Config.Build_Profile;
    for Create_Missing_Dirs use "True";
@@ -8,8 +12,23 @@ project Taskmaster is
    for Main use ("taskmaster.adb");
    for Languages use ("Ada", "C++");
 
+
+   package Builder is
+         case Mode is
+            when "gnatprove" =>
+               for Global_Configuration_Pragmas use "spark.adc";
+            when others =>
+               null;
+         end case;
+   end Builder;
+
    package Compiler is
-      for Default_Switches ("Ada") use Taskmaster_Config.Ada_Compiler_Switches;
+      case Mode is
+         when "gnatprove" =>
+            for Switches ("Ada") use ("-gnatwe", "-gnats");
+         when others =>
+            for Default_Switches ("Ada") use Taskmaster_Config.Ada_Compiler_Switches;
+      end case;
       for Default_Switches ("C++") use ("-g", "-Wextra", "-Werror", "-std=c++11");
    end Compiler;
 

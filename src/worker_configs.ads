@@ -3,7 +3,9 @@ with Ada.Strings.Bounded;
 with Ada.Real_Time;       use Ada.Real_Time;
 with Triggers;            use Triggers;
 
-package Worker_Configs is
+package Worker_Configs
+--   with SPARK_Mode
+is
    type Procedure_Access is access procedure;
    pragma Convention (C, Procedure_Access);
 
