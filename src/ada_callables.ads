@@ -5,7 +5,8 @@ package Ada_Callables is
    --  Instantiate the generic package for Ada procedures
    package Callable is new Callables (Ada_Procedure);
 
-   --  If a factory function is needed to create instances of Callable_Type:
+   --  If a factory function is needed to create instances of Callable_Type
+   --  based upon the Ada procedure.
    function Create_Callable (Proc : Ada_Procedure)
       return Callable.Callable_Type
       renames Callable.Create_Callable;
