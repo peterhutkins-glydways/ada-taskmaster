@@ -10,7 +10,7 @@
 --      * high-integrity applications requiring formal static analysis and verification,
 --      * embedded applications requiring both a small memory footprint and low execution overhead.
 --   See: https://ada-lang.io/docs/arm/AA-D/AA-D.13/
--- pragma Profile (Ravenscar);
+pragma Profile (Ravenscar);
 
 --  Alternately, the Ravenscar profile can be broken into its constituent pragmas.
 --  Experimentally, I have found that this is not 100% equivalent to "pragma Profile (Ravenscar)",
@@ -19,30 +19,29 @@
 --
 --  The following list constitutes the entirety of Ravenscar, broken into its constituent pragmas.
 --  This is useful for testing against individual pragmas.
-pragma Task_Dispatching_Policy(FIFO_Within_Priorities);
-pragma Locking_Policy(Ceiling_Locking);
-pragma Detect_Blocking;
-pragma Restrictions(
-   No_Abort_Statements,
-   No_Asynchronous_Control,
-   No_Calendar,
-   No_Dynamic_Attachment,
-   No_Dynamic_Priorities,
-   No_Implicit_Heap_Allocations,
-   No_Local_Protected_Objects,
-   No_Protected_Type_Allocators,
-   No_Relative_Delay,
-   No_Requeue_Statements,
-   No_Select_Statements,
-   No_Task_Allocators,
-   No_Task_Attributes_Package,
-   No_Task_Hierarchy,
-   No_Task_Termination,
-   Simple_Barriers,
-   Max_Entry_Queue_Length => 1,
-   Max_Protected_Entries => 1,
-   Max_Task_Entries => 0
-);
---  Implementation note: No_Task_Termination requires that all tasks terminate, but does not define
---  what happens when they do. We rely upon the main task terminating to end the program when
---  running in Linux.
+--  pragma Task_Dispatching_Policy(FIFO_Within_Priorities);
+--  pragma Locking_Policy(Ceiling_Locking);
+--  pragma Detect_Blocking;
+--  pragma Restrictions(
+--     No_Abort_Statements,
+--     No_Asynchronous_Control,
+--     No_Calendar,
+--     No_Dynamic_Attachment,
+--     No_Dynamic_Priorities,
+--     No_Implicit_Heap_Allocations,
+--     No_Local_Protected_Objects,
+--     No_Protected_Type_Allocators,
+--     No_Relative_Delay,
+--     No_Requeue_Statements,
+--     No_Select_Statements,
+--     No_Task_Allocators,
+--     No_Task_Attributes_Package,
+--     No_Task_Hierarchy,
+--     No_Task_Termination,
+--     Simple_Barriers,
+--     Max_Entry_Queue_Length => 1,
+--     Max_Protected_Entries => 1,
+--     Max_Task_Entries => 0
+--  );
+--
+

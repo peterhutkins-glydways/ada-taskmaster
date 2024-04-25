@@ -2,6 +2,7 @@
 with Ada.Real_Time;
 with Ada.Text_IO; use Ada.Text_IO;
 with Worker_Configs; use Worker_Configs;
+with Callables_Container; use Callables_Container;
 
 --  Worker_Tasks.adb
 package body Worker_Tasks is
@@ -10,11 +11,15 @@ package body Worker_Tasks is
       Task_Start : Ada.Real_Time.Time;
       Deadline   : Ada.Real_Time.Time;
       Task_Overrun : Boolean := False;
+      Init_Call : constant access Callable_Type :=
+         Get_Init_Callable (Config.all);
+      Triggered_Call : constant access Callable_Type :=
+         Get_Triggered_Callable (Config.all);
    begin
       --  Ada learning note: all this ".all" stuff is to dereference the access
       --  Execute initialization callable
-      if Get_Init_Callable (Config.all) /= null then
-         Get_Init_Callable (Config.all).all;
+      if Init_Call /= null then
+         Execute (Init_Call.all);
       end if;
 
       loop
@@ -23,8 +28,8 @@ package body Worker_Tasks is
          Deadline := Ada.Real_Time."+"(Task_Start, Get_Timeout (Config.all));
 
          --  Execute triggered callable
-         if Get_Triggered_Callable (Config.all) /= null then
-            Get_Triggered_Callable (Config.all).all;
+         if Triggered_Call /= null then
+            Execute (Triggered_Call.all);
          end if;
 
          --  Check if the triggered callable has completed within the deadline
