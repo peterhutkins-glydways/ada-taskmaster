@@ -8,6 +8,7 @@ begin
 
    Task_Manager.Task1_Trigger.Activate;
    Task_Manager.Task2_Trigger.Activate;
+   Task_Manager.Task3_Trigger.Activate;
 
    Put_Line ("The main task is about to loop forever. Press Ctrl-C to end.");
    --  Implementation note: "Restriction (No_Task_Termination)" doesn't
