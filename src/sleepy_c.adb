@@ -12,7 +12,8 @@ package body sleepy_c is
       args (1) := New_String ("2");
       argv := args'Address;
 
-      --   Beware: don't call 'main' or you'll restart the Ada program!
+      --   Beware: the 'main' symbol is already taken by Ada.
+      --   Don't call 'main' or you'll restart the Ada program!
       throwaway := sleepy_main (argc, argv);
    end stub;
 end sleepy_c;

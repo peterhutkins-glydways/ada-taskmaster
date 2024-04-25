@@ -49,7 +49,7 @@ private
       Init_Callable => null,
       Triggered_Callable => Task1_Call,
       Trigger => Task1_Trigger'Access,
-      Timeout => Ada.Real_Time.Seconds (1)
+      Time_Limit => Ada.Real_Time.Seconds (1)
    );
    Worker1 : Worker_Task (Config => Task1_Config'Access);
 
@@ -58,7 +58,7 @@ private
       Init_Callable => null,
       Triggered_Callable => Task2_Call,
       Trigger => Task2_Trigger'Access,
-      Timeout => Ada.Real_Time.Seconds (5)
+      Time_Limit => Ada.Real_Time.Milliseconds (1000)
    );
    Worker2 : Worker_Task (Config => Task2_Config'Access);
 
@@ -67,9 +67,8 @@ private
       Init_Callable => null,
       Triggered_Callable => Task3_Call,
       Trigger => Task3_Trigger'Access,
-      Timeout => Ada.Real_Time.Seconds (1)
+      Time_Limit => Ada.Real_Time.Seconds (1)
    );
    Worker3 : Worker_Task (Config => Task3_Config'Access);
-
 
 end Task_Manager;

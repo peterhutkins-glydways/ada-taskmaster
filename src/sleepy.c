@@ -4,7 +4,7 @@
 
 // Function to sleep for a specified number of seconds.
 
-// Note: I had to rename it from 'main' to 'sleepy_main' to avoid a name conflict
+// Note: I had to rename it from 'main' to 'sleepy_main' to avoid a name conflict with Ada's 'main' function.
 int sleepy_main(int argc, char *argv[]) {
     if (argc != 2) {
         printf("Usage: %s <seconds>\n", argv[0]);

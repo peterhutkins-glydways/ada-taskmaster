@@ -7,7 +7,7 @@ is
       Init_Callable :      access Callable_Type := null;
       Triggered_Callable : access Callable_Type := null;
       Trigger : access Task_Trigger;
-      Timeout : Time_Span
+      Time_Limit : Time_Span
    ) return Worker_Config
    is
    begin
@@ -16,7 +16,7 @@ is
          Init_Callable => Init_Callable,
          Triggered_Callable => Triggered_Callable,
          Trigger => Trigger,
-         Timeout => Timeout);
+         Time_Limit => Time_Limit);
    end Create_Config;
 
    --  This annoying list of accessor functions is necessary because the
@@ -52,11 +52,11 @@ is
    end Get_Trigger;
    pragma Inline (Get_Trigger);
 
-   function Get_Timeout (Config : Worker_Config)
+   function Get_Time_Limit (Config : Worker_Config)
                          return Time_Span is
    begin
-      return Config.Timeout;
-   end Get_Timeout;
-   pragma Inline (Get_Timeout);
+      return Config.Time_Limit;
+   end Get_Time_Limit;
+   pragma Inline (Get_Time_Limit);
 
 end Worker_Configs;

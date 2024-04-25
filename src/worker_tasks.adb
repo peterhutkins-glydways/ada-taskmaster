@@ -10,7 +10,7 @@ package body Worker_Tasks is
    task body Worker_Task is
       Task_Start : Ada.Real_Time.Time;
       Deadline   : Ada.Real_Time.Time;
-      Task_Overrun : Boolean := False;
+      Task_Time_Limit_Overrun : Boolean := False;
       Init_Call : constant access Callable_Type :=
          Get_Init_Callable (Config.all);
       Triggered_Call : constant access Callable_Type :=
@@ -25,7 +25,8 @@ package body Worker_Tasks is
       loop
          Get_Trigger (Config.all).Wait;  --  block here
          Task_Start := Ada.Real_Time.Clock;
-         Deadline := Ada.Real_Time."+"(Task_Start, Get_Timeout (Config.all));
+         Deadline := Ada.Real_Time."+"
+                       (Task_Start, Get_Time_Limit (Config.all));
 
          --  Execute triggered callable
          if Triggered_Call /= null then
@@ -34,14 +35,14 @@ package body Worker_Tasks is
 
          --  Check if the triggered callable has completed within the deadline
          if Ada.Real_Time.">"(Ada.Real_Time.Clock, Deadline) then
-            Task_Overrun := True;
+            Task_Time_Limit_Overrun := True;
          else
-            Task_Overrun := False;
+            Task_Time_Limit_Overrun := False;
          end if;
 
-         if Task_Overrun then
+         if Task_Time_Limit_Overrun then
             --  Report timeout or handle accordingly. e.g., log.
-            Put ("Task overrun detected on task " & Get_Name (Config.all));
+            Put ("Time_Limit_Overrun on task " & Get_Name (Config.all));
          end if;
       end loop;
    end Worker_Task;

@@ -15,7 +15,7 @@ is
       Init_Callable        : access Callable_Type := null;
       Triggered_Callable   : access Callable_Type := null;
       Trigger : access Task_Trigger;
-      Timeout : Time_Span
+      Time_Limit : Time_Span
    ) return Worker_Config;
 
    --  Accessors for Worker_Config
@@ -25,7 +25,7 @@ is
    function Get_Triggered_Callable (Config : Worker_Config)
                                     return access Callable_Type;
    function Get_Trigger (Config : Worker_Config) return access Task_Trigger;
-   function Get_Timeout (Config : Worker_Config) return Time_Span;
+   function Get_Time_Limit (Config : Worker_Config) return Time_Span;
 
 private
    --  Bounded string type for the Worker_Config name.
@@ -39,6 +39,6 @@ private
       Init_Callable      : access Callable_Type;
       Triggered_Callable : access Callable_Type;
       Trigger            : access Task_Trigger;
-      Timeout            : Time_Span;
+      Time_Limit            : Time_Span;
    end record;
 end Worker_Configs;
