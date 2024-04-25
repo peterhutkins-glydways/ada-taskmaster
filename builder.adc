@@ -45,3 +45,7 @@ pragma Profile (Ravenscar);
 --  );
 --
 
+pragma Restrictions (
+   No_Unrecognized_Aspects,   --   Disallow unrecognized aspects in "with" statement
+   No_Unrecognized_Pragmas    --   Disallow unrecognized pragmas
+);
