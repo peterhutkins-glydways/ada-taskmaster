@@ -6,12 +6,16 @@ with Ada.Strings; use Ada.Strings;
 --   The problem here is that it needs a constant size no matter what the type is.
 package Callables_Argument is
    type Value_Kind is (Int, Str);
+   MAX_NAME_LENGTH : constant := 8;
+   MAX_STRING_VALUE_LENGTH : constant := 8;
 
    type Arg (Kind : Value_Kind := Int) is private;
    function Create (Name : String;
-                     Value : Integer) return Arg;
+                     Value : Integer) return Arg
+      with Pre => Name'Length <= MAX_NAME_LENGTH;
    function Create (Name : String;
-                     Value : String) return Arg;
+                     Value : String) return Arg
+      with Pre => Name'Length <= MAX_NAME_LENGTH and Value'Length <= MAX_STRING_VALUE_LENGTH;
    --   Accessors
    function Kind (A : Arg) return Value_Kind;
    function Name (A : Arg) return String;
@@ -21,9 +25,9 @@ package Callables_Argument is
 private
    --   Bound the size of the strings.
    package Arg_Name_String is
-      new Ada.Strings.Bounded.Generic_Bounded_Length (Max => 8);
+      new Ada.Strings.Bounded.Generic_Bounded_Length (Max => MAX_NAME_LENGTH);
    package Arg_Value_String is
-      new Ada.Strings.Bounded.Generic_Bounded_Length (Max => 8);
+      new Ada.Strings.Bounded.Generic_Bounded_Length (Max => MAX_STRING_VALUE_LENGTH);
 
    --   Creates a variant record to hold the possible argument types.
    --   We want the size of this record to be known at compile time.
