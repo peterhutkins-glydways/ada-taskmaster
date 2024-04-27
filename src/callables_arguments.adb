@@ -6,12 +6,12 @@ package body Callables_Arguments is
    procedure Display_Args (Data : Args) is
    begin
       for E of Data loop
-         Put ("Arg Name: " & Arg_Name_String.To_String(E.Arg_Name) & " - ");
-         case E.Kind is
+         Put ("Arg Name: " & Name(E) & " - ");
+         case Kind(E) is
             when Int =>
-               Put_Line ("Integer: " & Integer'Image(E.Int_Value));
+               Put_Line ("Integer: " & Integer'Image(Value(E)));
             when Str =>
-               Put_Line ("String: " & Arg_Value_String.To_String(E.Str_Value));
+               Put_Line ("String: " & Value(E));
          end case;
       end loop;
    end Display_Args;
