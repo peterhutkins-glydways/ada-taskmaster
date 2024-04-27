@@ -7,7 +7,7 @@ with Ada.Strings; use Ada.Strings;
 package Callables_Argument is
    type Value_Kind is (Int, Str);
    MAX_NAME_LENGTH : constant := 8;
-   MAX_STRING_VALUE_LENGTH : constant := 8;
+   MAX_STRING_VALUE_LENGTH : constant := 16;
 
    type Arg (Kind : Value_Kind := Int) is private;
    function Create (Name : String;
@@ -44,5 +44,6 @@ type Arg (Kind : Value_Kind := Int) is record
             Str_Value : Arg_Value_String.Bounded_String;
       end case;
    end record
-      with Object_Size => 288;
+      with Object_Size => 160 + MAX_NAME_LENGTH * 8 + MAX_STRING_VALUE_LENGTH * 8;
+      --  160 is the size of the record, 8 is the size of each character.
 end Callables_Argument;
