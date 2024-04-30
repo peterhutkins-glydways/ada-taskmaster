@@ -39,6 +39,6 @@ private
       Init_Callable      : access Callable_Type;
       Triggered_Callable : access Callable_Type;
       Trigger            : access Task_Trigger;
-      Time_Limit            : Time_Span;
+      Time_Limit         : Time_Span;
    end record;
 end Worker_Configs;
