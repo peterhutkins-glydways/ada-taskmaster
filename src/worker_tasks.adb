@@ -3,6 +3,7 @@ with Ada.Real_Time;
 with Ada.Text_IO; use Ada.Text_IO;
 with Worker_Configs; use Worker_Configs;
 with Callables_Container; use Callables_Container;
+with Triggers;            use Triggers;
 
 --  Worker_Tasks.adb
 package body Worker_Tasks is
@@ -15,6 +16,8 @@ package body Worker_Tasks is
          Get_Init_Callable (Config.all);
       Triggered_Call : constant access Callable_Type :=
          Get_Triggered_Callable (Config.all);
+      Trigger : constant access Task_Trigger :=
+         Get_Trigger (Config.all);
    begin
       --  Ada learning note: all this ".all" stuff is to dereference the access
       --  Execute initialization callable
@@ -23,7 +26,7 @@ package body Worker_Tasks is
       end if;
 
       loop
-         Get_Trigger (Config.all).Wait;  --  block here
+         Trigger.Wait;  --  block here
          Task_Start := Ada.Real_Time.Clock;
          Deadline := Ada.Real_Time."+"
                        (Task_Start, Get_Time_Limit (Config.all));
