@@ -4,8 +4,10 @@ abstract project Taskmaster_Config is
    Crate_Name := "taskmaster";
 
    --   Coding Standards
-   Line_Length := "120";
-   Tab_Size := "3";
+   --   Compiler switches that begin "-gnaty" are style checks, documented 
+   --     at https://gcc.gnu.org/onlinedocs/gnat_ugn/Style-Checking.html
+   Line_Length := "255";  --  255 is the default for "-gnatyM"
+   Tab_Size := "3";       --  3 is the Ada95 syntax standard
 
    Alire_Host_OS := "linux";
 
@@ -27,7 +29,7 @@ abstract project Taskmaster_Config is
            ,"-gnatyA" -- Use of array index numbers in array attributes
            ,"-gnatyB" -- Check Boolean operators
            ,"-gnatyb" -- Blanks not allowed at statement end
-           ,"-gnatyc" -- Check comments
+           ,"-gnatyC" -- Check comments, single space
            ,"-gnaty-d" -- Disable check no DOS line terminators present
            ,"-gnatye" -- Check end/exit labels
            ,"-gnatyf" -- No form feeds or vertical tabs
