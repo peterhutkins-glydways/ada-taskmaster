@@ -16,25 +16,29 @@ with Hello_Ada;
 --    * resource reservation
 --    * avoidance of dynamic behaivor
 --    * memory determinism
+--  Exposes triggers for each task so that others can Activate it.
 
 package Task_Manager is
-   --  Expose the triggers for the tasks so that others can use it.
+   Task1_Name : aliased constant String := "Hello_C++_Task";
    Task1_Trigger : aliased Triggers.Task_Trigger;
-   Task2_Trigger : aliased Triggers.Task_Trigger;
-   Task3_Trigger : aliased Triggers.Task_Trigger;
-
    Task1_Call : constant access Callables_Container.Callable_Type :=
       new Callables_Container.Callable_Type'(
          Kind => Callables_Container.C_Kind,
          C_Call => C_Callables.Create_Callable (
             Hello_Cpp_Wrapper.Say_Hello_From_Cpp'Access)
          );
+
+   Task2_Name : aliased constant String := "Sleepy_Task";
+   Task2_Trigger : aliased Triggers.Task_Trigger;
    Task2_Call : constant access Callables_Container.Callable_Type :=
       new Callables_Container.Callable_Type'(
          Kind => Callables_Container.Ada_Kind,
          Ada_Call => Ada_Callables.Create_Callable (
             sleepy_c.stub'Access)
       );
+
+   Task3_Name : aliased constant String := "Hello_Ada_Task";
+   Task3_Trigger : aliased Triggers.Task_Trigger;
    Task3_Call : constant access Callables_Container.Callable_Type :=
       new Callables_Container.Callable_Type'(
          Kind => Callables_Container.Ada_Kind,
@@ -45,7 +49,7 @@ package Task_Manager is
 private
    --  Keep the task specifics private to avoid direct access.
    Task1_Config : aliased constant Worker_Config := Create_Config (
-      Name => "Hello_C++_Task",
+      Name => Task1_Name'Access,
       Init_Callable => null,
       Triggered_Callable => Task1_Call,
       Trigger => Task1_Trigger'Access,
@@ -54,7 +58,7 @@ private
    Worker1 : Worker_Task (Config => Task1_Config'Access);
 
    Task2_Config : aliased constant Worker_Config := Create_Config (
-      Name => "Sleepy_Task",
+      Name => Task2_Name'Access,
       Init_Callable => null,
       Triggered_Callable => Task2_Call,
       Trigger => Task2_Trigger'Access,
@@ -63,7 +67,7 @@ private
    Worker2 : Worker_Task (Config => Task2_Config'Access);
 
    Task3_Config : aliased constant Worker_Config := Create_Config (
-      Name => "Hello_Ada_Task",
+      Name => Task3_Name'Access,
       Init_Callable => null,
       Triggered_Callable => Task3_Call,
       Trigger => Task3_Trigger'Access,
