@@ -2,8 +2,9 @@
 #include "hello.h"
 #include <iostream>
 
+// Constructor. Shows when the object is created.
 HelloWorld::HelloWorld() {
-    std::cout << "HelloWorld constructed and initialized.\n";
+    std::cout << "C++HelloWorld constructed and initialized.\n";
 }
 
 

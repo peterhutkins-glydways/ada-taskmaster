@@ -7,20 +7,18 @@ with Triggers;            use Triggers;
 
 --  Worker_Tasks.adb
 package body Worker_Tasks is
-
    task body Worker_Task is
       Task_Start : Ada.Real_Time.Time;
       Deadline   : Ada.Real_Time.Time;
       Task_Time_Limit_Overrun : Boolean := False;
-      Init_Call : constant access Callable_Type :=
-         Get_Init_Callable (Config.all);
-      Triggered_Call : constant access Callable_Type :=
-         Get_Triggered_Callable (Config.all);
-      Trigger : constant access Task_Trigger :=
-         Get_Trigger (Config.all);
+      Task_Name : constant String := Config.Name.all;
+      Init_Call : constant access Callable_Type := Config.Init_Callable;
+      Triggered_Call : constant access Callable_Type := Config.Triggered_Callable;
+      Trigger : constant access Task_Trigger := Config.Trigger;
+      Time_Limit : constant Ada.Real_Time.Time_Span := Config.Time_Limit;
    begin
-      --  Ada learning note: all this ".all" stuff is to dereference the access
       --  Execute initialization callable
+      --  Ada learning note: all this ".all" stuff is to dereference the access
       if Init_Call /= null then
          Execute (Init_Call.all);
       end if;
@@ -28,8 +26,7 @@ package body Worker_Tasks is
       loop
          Trigger.Wait;  --  block here
          Task_Start := Ada.Real_Time.Clock;
-         Deadline := Ada.Real_Time."+"
-                       (Task_Start, Get_Time_Limit (Config.all));
+         Deadline := Ada.Real_Time."+" (Task_Start, Time_Limit);
 
          --  Execute triggered callable
          if Triggered_Call /= null then
@@ -45,7 +42,7 @@ package body Worker_Tasks is
 
          if Task_Time_Limit_Overrun then
             --  Report timeout or handle accordingly. e.g., log.
-            Put ("Time_Limit_Overrun on task " & Get_Name (Config.all));
+            Put ("Time_Limit_Overrun on task " & Task_Name);
          end if;
       end loop;
    end Worker_Task;
