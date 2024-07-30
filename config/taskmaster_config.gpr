@@ -17,13 +17,13 @@ abstract project Taskmaster_Config is
    Ada_Compiler_Switches := External_As_List ("ADAFLAGS", " ");
    Ada_Compiler_Switches := Ada_Compiler_Switches &
           (
-            "-Og" -- Optimize for debug
-           ,"-ffunction-sections" -- Separate ELF section for each function
+            "-ffunction-sections" -- Separate ELF section for each function
            ,"-fdata-sections" -- Separate ELF section for each variable
            ,"-g" -- Generate debug info
-           ,"-gnatwa" -- Enable all warnings
+           ,"-gnatwa" -- (SWE02) Activates most optional warnings
+           ,"-gnatwe" -- (SWE02) Treat warnings as errors
+           ,"-gnatwv" -- (RPP04) Activate warnings on unassigned variables. Captures unassigned out parameters.
            ,"-gnatw.X" -- Disable warnings for No_Exception_Propagation
-           ,"-gnatVa" -- All validity checks
            ,"-gnaty" & Tab_Size  -- Specify indentation level
            ,"-gnatya" -- Check attribute casing
            ,"-gnatyA" -- Use of array index numbers in array attributes
@@ -52,5 +52,27 @@ abstract project Taskmaster_Config is
 
    type Build_Profile_Kind is ("release", "validation", "development");
    Build_Profile : Build_Profile_Kind := "development";
+   case Build_Profile is
+      when "release" =>
+      Ada_Compiler_Switches := Ada_Compiler_Switches &
+         (
+           "-O2" -- Optimize for speed
+         );
+      when "validation" =>
+      Ada_Compiler_Switches := Ada_Compiler_Switches &
+         (
+           "-Og" -- Optimize for debug
+          ,"-fstack-check" -- Check for stack overflow
+          ,"-fstack-usage" -- Print stack usage
+         );
+      when "development" =>
+      Ada_Compiler_Switches := Ada_Compiler_Switches &
+         (
+           "-O0" -- No optimization
+          ,"-fstack-check" -- Check for stack overflow
+          ,"-fstack-usage" -- Print stack usage
+          ,"-gnatVa" -- Extra value validity checks. ** NOT to be used with optimization, or for production release. **
+         );
+   end case;
 
 end Taskmaster_Config;
