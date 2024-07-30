@@ -6,9 +6,8 @@ with Callables_Container; use Callables_Container;
 package Worker_Configs
 --   with SPARK_Mode
 is
-   type Name_Acc is access constant String;
    type Worker_Config is record
-      Name               : Name_Acc;
+      Name               : access constant String;
       Init_Callable      : access Callable_Type;
       Triggered_Callable : access Callable_Type;
       Trigger            : access Task_Trigger;
