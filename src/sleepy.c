@@ -17,9 +17,9 @@ int sleepy_main(int argc, char *argv[]) {
         return 1;
     }
 
-    printf("Delaying for %d seconds...\n", delay_seconds);
+    printf("C Sleepy_Task Delaying for %d seconds...\n", delay_seconds);
     sleep(delay_seconds);  // POSIX sleep function
-    printf("Delay complete.\n");
+    printf("C Sleepy_Task Delay complete.\n");
 
     return 0;
 }

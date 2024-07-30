@@ -4,13 +4,13 @@ with Task_Manager; use Task_Manager;
 
 procedure Taskmaster is
 begin
-   Put_Line ("This is the first line from Ada.");
+   Put_Line ("Ada main task started.");
 
    Task_Manager.Task1_Trigger.Activate;
    Task_Manager.Task2_Trigger.Activate;
    Task_Manager.Task3_Trigger.Activate;
 
-   Put_Line ("The main task is about to loop forever. Press Ctrl-C to end.");
+   Put_Line ("Ada main task is about to loop forever. Press Ctrl-C to end.");
    --  Implementation note: "Restriction (No_Task_Termination)" doesn't
    --  actually require that no tasks terminate, but does not define
    --  what happens when they do.
