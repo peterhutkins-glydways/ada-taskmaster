@@ -11,6 +11,7 @@ with Ada_Callables;
 with Hello_Cpp_Wrapper;
 with sleepy_c;
 with Hello_Ada;
+with Exception_C_Wrapper;
 
 --  Statically declares configurations and tasks. This allows:
 --    * resource reservation
@@ -67,10 +68,26 @@ package Task_Manager is
       Time_Limit         => Ada.Real_Time.Seconds (1)
    );
 
+   Task4_Name : aliased constant String := "C Exception Task";
+   Task4_Trigger : aliased Triggers.Task_Trigger;
+   Task4_Call : aliased Callables_Container.Callable_Type :=
+      Callables_Container.Callable_Type'(
+         Kind => Callables_Container.C_Kind,
+         C_Call => C_Callables.Create_Callable (
+            Exception_C_Wrapper.cause_exception'Access)
+      );
+   Task4_Config : aliased constant Worker_Config := Worker_Config'(
+      Name               => Task4_Name'Access,
+      Init_Callable      => null,
+      Triggered_Callable => Task4_Call'Access,
+      Trigger            => Task4_Trigger'Access,
+      Time_Limit         => Ada.Real_Time.Seconds (1)
+   );
 private
    --  Keep the task private to avoid direct access.
    Worker1 : Worker_Task (Config => Task1_Config'Access);
    Worker2 : Worker_Task (Config => Task2_Config'Access);
    Worker3 : Worker_Task (Config => Task3_Config'Access);
+   Worker4 : Worker_Task (Config => Task4_Config'Access);
 
 end Task_Manager;

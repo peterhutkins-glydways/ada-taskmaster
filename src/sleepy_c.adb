@@ -7,11 +7,11 @@ package body sleepy_c is
       argv    : System.Address;
       args    : chars_ptr_array (0 .. 1);
       discard : Interfaces.C.int;   --  gets assigned, but never used.
-      --   Fun note: unused warnings are suppressed when  the variable name contains the
+      --   Ada learning note: unused warnings are suppressed when  the variable name contains the
       --   strings "discard, dummy, unused, ignore, junk"
    begin
       args (0) := New_String ("sleepy_c");
-      args (1) := New_String ("2");
+      args (1) := New_String ("1500");
       argv     := args'Address;
 
       --   Beware: the 'main' symbol is already taken by Ada.
