@@ -24,29 +24,29 @@ abstract project Taskmaster_Config is
            ,"-gnatwe" -- (SWE02) Treat warnings as errors
            ,"-gnatwv" -- (RPP04) Activate warnings on unassigned variables. Captures unassigned out parameters.
            ,"-gnatw.x" -- Enable warnings for No_Exception_Propagation
-           ,"-gnaty" & Tab_Size  -- Specify indentation level
-           ,"-gnatya" -- Check attribute casing
-           ,"-gnatyA" -- Use of array index numbers in array attributes
+           ,"-gnaty" & Tab_Size  -- (STL02) Specify indentation level
+           ,"-gnatya" -- (STL03) Check attribute casing
+           ,"-gnatyA" -- (STL06) Use of array index numbers in array attributes
            ,"-gnatyB" -- Check Boolean operators
            ,"-gnatyb" -- Blanks not allowed at statement end
            ,"-gnatyC" -- Check comments, single space
-           ,"-gnaty-d" -- Disable check no DOS line terminators present
-           ,"-gnatye" -- Check end/exit labels
-           ,"-gnatyf" -- No form feeds or vertical tabs
-           ,"-gnatyh" -- No horizontal tabs
-           ,"-gnatyi" -- Check if-then layout
-           ,"-gnatyI" -- check mode IN keywords
-           ,"-gnatyk" -- Check keyword casing
+           ,"-gnatyD" -- (STL03) Check identifiers case
+           ,"-gnaty-d" -- (STL07)Disable check no DOS line terminators present
+           ,"-gnatye" -- (STL09) Check end/exit labels
+           ,"-gnatyf" -- (STL08) No form feeds or vertical tabs
+           ,"-gnatyh" -- (STL02) No horizontal tabs
+           ,"-gnatyi" -- (STL10) Check if-then layout
+           ,"-gnatyk" -- (STL05) Check keyword casing
            ,"-gnatyl" -- Check layout
-           ,"-gnatyM" & Line_Length -- Check maximum line length
-           ,"-gnatyn" -- Check casing of entities in Standard
-           ,"-gnatyO" -- Check that overriding subprograms are explicitly marked as such
-           ,"-gnatyp" -- Check pragma casing
-           ,"-gnatyr" -- Check identifier references casing
-           ,"-gnatyS" -- Check no statements after THEN/ELSE
-           ,"-gnatyt" -- Check token spacing
-           ,"-gnatyu" -- Check unnecessary blank lines
-           ,"-gnatyx" -- Check extra parentheses
+           ,"-gnatyM" & Line_Length -- (STL11) Check maximum line length
+           ,"-gnatyn" -- (STL04) Check casing of entities in Standard
+           ,"-gnatyO" -- (STL12) Check that overriding subprograms are explicitly marked as such
+           ,"-gnatyp" -- (STL03) Check pragma casing
+           ,"-gnatyr" -- (STL03) Check identifier references casing
+           ,"-gnatys" -- (STL01) Check separate specs and body. 
+           ,"-gnatyt" -- (STL13) Check token spacing
+           ,"-gnatyu" -- (STL14) Check unnecessary blank lines
+           ,"-gnatyx" -- (STL15) Check extra parentheses
            ,"-gnatW8" -- UTF-8 encoding for wide characters
           );
 
