@@ -58,12 +58,11 @@ pragma Restrictions (
    No_Unrecognized_Pragmas,   --   Disallow unrecognized pragmas
    No_Anonymous_Allocators,   --   (DYN01) Disallow anonymous access types; use a named access type
    No_Coextensions,           --   (DYN01) Disallow coextensions; use intermediate variables of named access type in objects
-   No_Access_Parameter_Allocators, -- (DYN01) Disallow allocatros in parameters; use intermediate variables of named access type
+   No_Access_Parameter_Allocators, -- (DYN01) Disallow allocators in parameters; use intermediate variables of named access type
    Immediate_Reclamation,     --   (DYN01) Storage allocated by the compiler at run-time for representing objects is reclaimed at once.
-   No_Allocators,             --   (DYN02)(DYN03) Disallow allocators. Declared objects only.
-   No_Task_Allocators,        --   (DYN02) Disallow task allocators. Also covered by Ravenscar.
-   --  The following restriction is deemed too restrictive for general use because it precludes
-   --  use of the stack for dynamic memory allocation. This is a useful feature in many cases.
-   --  No_Local_Allocators,       --   (DYN04) Disallow local allocators; use declared objects
+   No_Allocators,             --   (DYN02)(DYN03) Disallow allocators. Statically declared memory objects only.
+   No_Task_Allocators,        --   (DYN02) Disallow task allocators. (Also covered by Ravenscar.)
+   --  The No_Local_Allocators restriction is deemed too restrictive. The restriction declaration is retained for testing purposes.  
+   -- No_Local_Allocators,       --   (DYN04) Disallow local allocators; use declared objects
    No_Dependence => Ada.Unchecked_Deallocation --  (DYN03)(DYN04) Disallow unchecked deallocation
 );
