@@ -1,5 +1,4 @@
 --  Worker_Tasks.adb
-with Ada.Real_Time;
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Exceptions;
 with Worker_Configs; use Worker_Configs;
@@ -8,6 +7,14 @@ with Triggers;            use Triggers;
 
 --  Worker_Tasks.adb
 package body Worker_Tasks is
+   -- helper function for reporting time spans
+   function Time_Span_To_String (Span : Ada.Real_Time.Time_Span) return String is
+      D : constant Float := Float (Ada.Real_Time.To_Duration (Span));
+      Result : constant String := Float'Image (D);
+   begin
+      return Result;
+   end Time_Span_To_String;
+
    task body Worker_Task is
       Task_Start : Ada.Real_Time.Time;
       Task_End   : Ada.Real_Time.Time;
@@ -19,13 +26,6 @@ package body Worker_Tasks is
       Triggered_Call : constant access Callable_Type := Config.Triggered_Callable;
       Trigger : constant access Task_Trigger := Config.Trigger;
       Time_Limit : constant Ada.Real_Time.Time_Span := Config.Time_Limit;
-
-      function Time_Span_To_String (Span : Ada.Real_Time.Time_Span) return String is
-         D : constant Float := Float (Ada.Real_Time.To_Duration (Span));
-         Result : constant String := Float'Image (D);
-      begin
-         return Result;
-      end Time_Span_To_String;
 
    begin
       --  Execute initialization callable

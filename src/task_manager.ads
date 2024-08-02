@@ -9,7 +9,7 @@ with Ada_Callables;
 
 --  include the Procedures that we wish to call via Trigger
 with Hello_Cpp_Wrapper;
-with sleepy_c;
+with Sleepy_C;
 with Hello_Ada;
 with Exception_C_Wrapper;
 
@@ -42,7 +42,7 @@ package Task_Manager is
       Callables_Container.Callable_Type'(
          Kind => Callables_Container.Ada_Kind,
          Ada_Call => Ada_Callables.Create_Callable (
-            sleepy_c.stub'Access)
+            Sleepy_C.Stub'Access)
       );
    Task2_Config : aliased constant Worker_Config := Worker_Config'(
       Name => Task2_Name'Access,

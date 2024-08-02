@@ -1,6 +1,12 @@
 --   builder.adc
---   This is where we define all of the pragrams required for building an Ada executable under the
---   Glydaywas Ada Coding Convention and the Ravenscar profile.
+--   This is where we define all of the pragmas required for building an Ada executable under the
+--   Glyways Ada Coding Convention.
+--
+--   This file may be re-used for multiple projects, and is intended to be included in the project
+--   file (e.g. *.gpr) as a global configuration pragma file as follows:
+--     package Builder is
+--        for Global_Configuration_Pragmas use "builder.adc";
+--     end Builder;
 --
 --   The Ravenscar profile is a subset of the Ada concurrency facilities that supports determinism,
 --   schedulability analysis, constrained memory utilization, and certification to the highest
@@ -60,10 +66,10 @@ pragma Restrictions (
    No_Coextensions,           --   (DYN01) Disallow coextensions; use intermediate variables of named access type in objects
    No_Access_Parameter_Allocators, -- (DYN01) Disallow allocatros in parameters; use intermediate variables of named access type
    Immediate_Reclamation,     --   (DYN01) Storage allocated by the compiler at run-time for representing objects is reclaimed at once.
-   No_Allocators,             --   (DYN02)(DYN03) Disallow allocators. Declared objects only.
+   No_Allocators,             --   (DYN02)(DYN03) This restriction ensures at compile time that there are no occurrences of an allocator.
    No_Task_Allocators,        --   (DYN02) Disallow task allocators. Also covered by Ravenscar.
-   --  The following restriction is deemed too restrictive for general use because it precludes
-   --  use of the stack for dynamic memory allocation. This is a useful feature in many cases.
-   --  No_Local_Allocators,       --   (DYN04) Disallow local allocators; use declared objects
+   --  The No_Local_Allocators restriction is deemed too restrictive for general use, but is included here for completeness.
+   -- No_Local_Allocators,       --   (DYN04) This restriction ensures at compile time that there are no occurrences of an allocator in subprograms, generic subprograms, tasks, and entry bodies.
+   No_Dispatch,               --   (OOP01) Disallow class-wide constructs
    No_Dependence => Ada.Unchecked_Deallocation --  (DYN03)(DYN04) Disallow unchecked deallocation
 );
