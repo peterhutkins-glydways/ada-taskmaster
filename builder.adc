@@ -71,5 +71,6 @@ pragma Restrictions (
    --  The No_Local_Allocators restriction is deemed too restrictive for general use, but is included here for completeness.
    -- No_Local_Allocators,       --   (DYN04) This restriction ensures at compile time that there are no occurrences of an allocator in subprograms, generic subprograms, tasks, and entry bodies.
    No_Dispatch,               --   (OOP01) Disallow class-wide constructs
+   No_Recursion,              --   (RPP12) Disallow recursion
    No_Dependence => Ada.Unchecked_Deallocation --  (DYN03)(DYN04) Disallow unchecked deallocation
 );
