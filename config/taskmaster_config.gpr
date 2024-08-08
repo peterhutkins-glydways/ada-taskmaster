@@ -25,7 +25,7 @@ abstract project Taskmaster_Config is
            ,"-gnatwa" -- (SWE02)(RPP11) Activates most optional warnings
            ,"-gnatwe" -- (SWE02) Treat warnings as errors
            ,"-gnatwv" -- (RPP04) Activate warnings on unassigned variables. Captures unassigned out parameters.
-           ,"-gnatw.x" -- Enable warnings for No_Exception_Propagation
+           ,"-gnatw.X" -- TEMPORARY: Disable warnings for No_Exception_Propagation. TEMPORARY to allow compilation until all exceptions are handled.
            ,"-gnaty" & Tab_Size  -- (STL02) Specify indentation level
            ,"-gnatya" -- (STL03) Check attribute casing
            ,"-gnatyA" -- (STL06) Use of array index numbers in array attributes

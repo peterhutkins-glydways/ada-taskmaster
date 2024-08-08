@@ -7,7 +7,7 @@ with Ada.Real_Time;
 
 package Worker_Tasks is
    --  Takes a (constant reference to a) configuration
-   type Worker_Config_Access is access constant Worker_Configs.Worker_Config;
+   type Worker_Config_Access is not null access constant Worker_Configs.Worker_Config;
 
    task type Worker_Task (Config : Worker_Config_Access);
 

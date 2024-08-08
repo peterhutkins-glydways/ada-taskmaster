@@ -1,6 +1,5 @@
 --  Worker_Tasks.adb
 with Ada.Text_IO; use Ada.Text_IO;
-with Ada.Exceptions;
 with Worker_Configs; use Worker_Configs;
 with Callables_Container; use Callables_Container;
 with Triggers;            use Triggers;
@@ -28,6 +27,9 @@ package body Worker_Tasks is
       Time_Limit : constant Ada.Real_Time.Time_Span := Config.Time_Limit;
 
    begin
+
+      pragma Assert (Config /= null, "Config must not be null");
+
       --  Execute initialization callable
       --  Ada learning note: all this ".all" stuff is to dereference the access
       if Init_Call /= null then
@@ -35,43 +37,30 @@ package body Worker_Tasks is
       end if;
 
       loop
-         begin
-            -- Exception handling block
-            begin
-               Trigger.Wait;  --  block here
-               Task_Start := Ada.Real_Time.Clock;
-               Deadline := Ada.Real_Time."+" (Task_Start, Time_Limit);
+         Trigger.Wait;  --  block here
+         Task_Start := Ada.Real_Time.Clock;
+         Deadline := Ada.Real_Time."+" (Task_Start, Time_Limit);
 
-               --  Execute triggered callable
-               if Triggered_Call /= null then
-                  Execute (Triggered_Call.all);
-               end if;
+         --  Execute triggered callable
+         if Triggered_Call /= null then
+            Execute (Triggered_Call.all);
+         end if;
 
-               Task_End := Ada.Real_Time.Clock;
-               Task_Runtime := Ada.Real_Time."-"(Task_End, Task_Start);
+         --  Check if the triggered callable has completed within the deadline
+         Task_End := Ada.Real_Time.Clock;
+         Task_Runtime := Ada.Real_Time."-"(Task_End, Task_Start);
+         if Ada.Real_Time.">"(Task_End, Deadline) then
+            Task_Time_Limit_Overrun := True;
+         else
+            Task_Time_Limit_Overrun := False;
+         end if;
 
-               --  Check if the triggered callable has completed within the deadline
-               if Ada.Real_Time.">"(Task_End, Deadline) then
-                  Task_Time_Limit_Overrun := True;
-               else
-                  Task_Time_Limit_Overrun := False;
-               end if;
-
-               if Task_Time_Limit_Overrun then
-                  --  Report timeout or handle accordingly. e.g., log.
-                  Put_Line ("Time_Limit_Overrun on task " & Task_Name);
-                  Put_Line ("Task_Limit: " & Time_Span_To_String (Time_Limit));
-                  Put_Line ("Task_Runtime: " & Time_Span_To_String (Task_Runtime));
-               end if;
-            exception
-               -- Capture exceptions and report
-               when E : others =>
-                  --  Report exception or handle accordingly. e.g., log.
-                  Put_Line ("Exception in task " & Task_Name);
-                  Put_Line ("Exception type: " & Ada.Exceptions.Exception_Name (E));
-                  Put_Line ("Exception message: " & Ada.Exceptions.Exception_Message (E));
-            end;
-         end;  --  Exception handling block
+         if Task_Time_Limit_Overrun then
+            --  Report timeout or handle accordingly. e.g., log.
+            Put_Line ("Time_Limit_Overrun on task " & Task_Name);
+            Put_Line ("Task_Limit: " & Time_Span_To_String (Time_Limit));
+            Put_Line ("Task_Runtime: " & Time_Span_To_String (Task_Runtime));
+         end if;
       end loop;
    end Worker_Task;
 

@@ -74,3 +74,12 @@ pragma Restrictions (
    No_Recursion,              --   (RPP12) Disallow recursion
    No_Dependence => Ada.Unchecked_Deallocation --  (DYN03)(DYN04) Disallow unchecked deallocation
 );
+
+-- The following pragmas emulate the limitations of the GNAT PRO certifiable runtime.
+-- See https://docs.adacore.com/live/wave/gnat_ugx/html/gnat_ugx/gnat_ugx/support_for_certified_systems.html
+-- The Certifiable Profiles provide limited local exception handling through the implicit application of pragma
+--  Restrictions (No_Exception_Propagation)`. This restriction allows exceptions to be raised and handled only if the
+--  handler is in the same subprogram (more generally in the same scope not counting packages and blocks).
+pragma Restrictions (
+   No_Exception_Propagation
+);
