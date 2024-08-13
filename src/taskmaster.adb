@@ -2,6 +2,7 @@
 with Ada.Text_IO; use Ada.Text_IO;
 with Task_Manager; use Task_Manager;
 with Busy_Wait; use Busy_Wait;
+with Last_Chance_Handler;  --  Install own version of Last_Chance_Handler for uncaught exceptions
 
 procedure Taskmaster is
 begin

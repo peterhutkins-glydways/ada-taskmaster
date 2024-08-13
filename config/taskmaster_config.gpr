@@ -26,6 +26,7 @@ abstract project Taskmaster_Config is
            ,"-gnatwe" -- (SWE02) Treat warnings as errors
            ,"-gnatwv" -- (RPP04) Activate warnings on unassigned variables. Captures unassigned out parameters.
            ,"-gnatw.X" -- TEMPORARY: Disable warnings for No_Exception_Propagation. TEMPORARY to allow compilation until all exceptions are handled.
+           ,"-gnatwl" -- Activate warnings for suspictious elaboration pragmas.
            ,"-gnaty" & Tab_Size  -- (STL02) Specify indentation level
            ,"-gnatya" -- (STL03) Check attribute casing
            ,"-gnatyA" -- (STL06) Use of array index numbers in array attributes
@@ -71,8 +72,8 @@ abstract project Taskmaster_Config is
       Ada_Compiler_Switches := Ada_Compiler_Switches &
          (
            "-O0" -- No optimization
-          ,"-fstack-check" -- Check for stack overflow
-          ,"-fstack-usage" -- Print stack usage
+          ,"-fstack-check" -- Check for stack overflow. See https://docs.adacore.com/live/wave/gnat_ugn/html/gnat_ugn/gnat_ugn/gnat_and_program_execution.html#stack-overflow-checking
+          ,"-fstack-usage" -- Print stack usage in *.su files. See https://docs.adacore.com/live/wave/gnat_ugn/html/gnat_ugn/gnat_ugn/gnat_and_program_execution.html#static-stack-usage-analysis
           ,"-gnatVa" -- Extra value validity checks. ** NOT to be used with optimization, or for production release. **
          );
    end case;

@@ -12,7 +12,6 @@ project Taskmaster is
    for Main use ("taskmaster.adb");
    for Languages use ("Ada", "C", "C++");
 
-
    package Builder is
       case Mode is
          when "gnatprove" =>
@@ -46,7 +45,8 @@ project Taskmaster is
    package Linker is
       for Default_Switches ("Ada") use
          ("-L" & External ("GNAT_NATIVE_ALIRE_PREFIX", "/some/default/path") & "/lib64"  -- Adjust this path if the libraries are in a different subdirectory
-         , "-lstdc++"
+         , "-lstdc++",
+         "-Wl,-Map=taskmaster.map"  -- Generate a map file
          ); 
    end Linker;
 

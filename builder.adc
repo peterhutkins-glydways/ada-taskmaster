@@ -21,7 +21,7 @@ pragma Profile (Ravenscar);   -- (CON01) Use the Ravenscar profile
 --  Alternately, the Ravenscar profile can be broken into its constituent pragmas.
 --  Experimentally, I have found that this is not a 100% substitute to "pragma Profile (Ravenscar)",
 --  as there are other pragmas (e.g. "pragma Partition_Elaboration_Policy (Sequential)"); that
---  require a delcared restricted profile like Ravenscar.
+--  require a declared restricted profile like Ravenscar.
 --
 --  The following list constitutes the entirety of Ravenscar, broken into its constituent pragmas.
 --  This is useful for testing against individual pragmas.
