@@ -54,7 +54,8 @@ project Taskmaster is
       for Artifacts (".") use ("share");
    end Install;
 
-   -- When changing the pretty-printer configuration, please restart the IDE Extensions
+   -- When changing the pretty-printer configuration, please restart the IDE Extensions for the changes to take effect. ("Developer: Reload Window")
+   -- Documentation can be found at https://docs.adacore.com/gnat_ugn-docs/html/gnat_ugn/gnat_ugn/gnat_utility_programs.html#formatting-rules
    package Pretty_Printer is
       for Default_Switches ("ada") use
         ("--layout=default",
