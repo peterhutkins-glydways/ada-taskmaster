@@ -1,7 +1,7 @@
 --   Task_Manager.ads
-with Worker_Tasks; use Worker_Tasks;
+with Worker_Tasks;        use Worker_Tasks;
 with Ada.Real_Time;
-with Worker_Configs; use Worker_Configs;
+with Worker_Configs;      use Worker_Configs;
 with Triggers;
 with Callables_Container; use Callables_Container;
 with C_Callables;
@@ -20,69 +20,61 @@ with Exception_C_Wrapper;
 --  TODO: hide specifics of task configurations in the body, so they are not public.
 
 package Task_Manager is
-   Task1_Name : aliased String := "Hello_C++_Task";
+   Task1_Name    : aliased String                            := "Hello_C++_Task";
    Task1_Trigger : aliased Triggers.Task_Trigger;
-   Task1_Call : aliased Callables_Container.Callable_Type :=
-      Callables_Container.Callable_Type'(
-         Kind => Callables_Container.C_Kind,
-         C_Call => C_Callables.Create_Callable (
-            Hello_Cpp_Wrapper.Say_Hello_From_Cpp'Access)
-         );
-   Task1_Config : aliased constant Worker_Config := Worker_Config'(
-      Name               => Task1_Name'Access,
-      Init_Callable      => null,
-      Triggered_Callable => Task1_Call'Access,
-      Trigger            => Task1_Trigger'Access,
-      Time_Limit         => Ada.Real_Time.Seconds (1)
-   );
+   Task1_Call    : aliased Callables_Container.Callable_Type :=
+     Callables_Container.Callable_Type'
+       (Kind   => Callables_Container.C_Kind,
+        C_Call => C_Callables.Create_Callable (Hello_Cpp_Wrapper.Say_Hello_From_Cpp'Access));
+   Task1_Config  : aliased constant Worker_Config            :=
+     Worker_Config'
+       (Name               => Task1_Name'Access,
+        Init_Callable      => null,
+        Triggered_Callable => Task1_Call'Access,
+        Trigger            => Task1_Trigger'Access,
+        Time_Limit         => Ada.Real_Time.Seconds (1));
 
-   Task2_Name : aliased constant String := "Sleepy_Task";
+   Task2_Name    : aliased constant String                   := "Sleepy_Task";
    Task2_Trigger : aliased Triggers.Task_Trigger;
-   Task2_Call : aliased Callables_Container.Callable_Type :=
-      Callables_Container.Callable_Type'(
-         Kind => Callables_Container.Ada_Kind,
-         Ada_Call => Ada_Callables.Create_Callable (
-            Sleepy_C.Stub'Access)
-      );
-   Task2_Config : aliased constant Worker_Config := Worker_Config'(
-      Name => Task2_Name'Access,
-      Init_Callable      => null,
-      Triggered_Callable => Task2_Call'Access,
-      Trigger            => Task2_Trigger'Access,
-      Time_Limit         => Ada.Real_Time.Milliseconds (1000)
-   );
+   Task2_Call    : aliased Callables_Container.Callable_Type :=
+     Callables_Container.Callable_Type'
+       (Kind     => Callables_Container.Ada_Kind,
+        Ada_Call => Ada_Callables.Create_Callable (Sleepy_C.Stub'Access));
+   Task2_Config  : aliased constant Worker_Config            :=
+     Worker_Config'
+       (Name               => Task2_Name'Access,
+        Init_Callable      => null,
+        Triggered_Callable => Task2_Call'Access,
+        Trigger            => Task2_Trigger'Access,
+        Time_Limit         => Ada.Real_Time.Milliseconds (1_000));
 
-   Task3_Name : aliased constant String := "Hello_Ada_Task";
+   Task3_Name    : aliased constant String                   := "Hello_Ada_Task";
    Task3_Trigger : aliased Triggers.Task_Trigger;
-   Task3_Call : aliased Callables_Container.Callable_Type :=
-      Callables_Container.Callable_Type'(
-         Kind => Callables_Container.Ada_Kind,
-         Ada_Call => Ada_Callables.Create_Callable (
-            Hello_Ada'Access)
-      );
-   Task3_Config : aliased constant Worker_Config := Worker_Config'(
-      Name               => Task3_Name'Access,
-      Init_Callable      => null,
-      Triggered_Callable => Task3_Call'Access,
-      Trigger            => Task3_Trigger'Access,
-      Time_Limit         => Ada.Real_Time.Seconds (1)
-   );
+   Task3_Call    : aliased Callables_Container.Callable_Type :=
+     Callables_Container.Callable_Type'
+       (Kind     => Callables_Container.Ada_Kind,
+        Ada_Call => Ada_Callables.Create_Callable (Hello_Ada'Access));
+   Task3_Config  : aliased constant Worker_Config            :=
+     Worker_Config'
+       (Name               => Task3_Name'Access,
+        Init_Callable      => null,
+        Triggered_Callable => Task3_Call'Access,
+        Trigger            => Task3_Trigger'Access,
+        Time_Limit         => Ada.Real_Time.Seconds (1));
 
-   Task4_Name : aliased constant String := "C Exception Task";
+   Task4_Name    : aliased constant String                   := "C Exception Task";
    Task4_Trigger : aliased Triggers.Task_Trigger;
-   Task4_Call : aliased Callables_Container.Callable_Type :=
-      Callables_Container.Callable_Type'(
-         Kind => Callables_Container.C_Kind,
-         C_Call => C_Callables.Create_Callable (
-            Exception_C_Wrapper.cause_exception'Access)
-      );
-   Task4_Config : aliased constant Worker_Config := Worker_Config'(
-      Name               => Task4_Name'Access,
-      Init_Callable      => null,
-      Triggered_Callable => Task4_Call'Access,
-      Trigger            => Task4_Trigger'Access,
-      Time_Limit         => Ada.Real_Time.Seconds (1)
-   );
+   Task4_Call    : aliased Callables_Container.Callable_Type :=
+     Callables_Container.Callable_Type'
+       (Kind   => Callables_Container.C_Kind,
+        C_Call => C_Callables.Create_Callable (Exception_C_Wrapper.cause_exception'Access));
+   Task4_Config  : aliased constant Worker_Config            :=
+     Worker_Config'
+       (Name               => Task4_Name'Access,
+        Init_Callable      => null,
+        Triggered_Callable => Task4_Call'Access,
+        Trigger            => Task4_Trigger'Access,
+        Time_Limit         => Ada.Real_Time.Seconds (1));
 private
    --  Keep the task private to avoid direct access.
    Worker1 : Worker_Task (Config => Task1_Config'Access);

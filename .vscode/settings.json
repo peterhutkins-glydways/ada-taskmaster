@@ -1,12 +1,13 @@
 {
     "editor.defaultFormatter": null,
     "[ada]": {
+        "editor.defaultFormatter": "AdaCore.ada",
         "editor.formatOnType": true,
         "diffEditor.ignoreTrimWhitespace": true,
         "files.trimTrailingWhitespace": true,
         "files.trimFinalNewlines": true,
         "editor.wordWrap": "wordWrapColumn",
-        "editor.wordWrapColumn": 120,  // matches coding_standard.ads
-        "editor.tabSize": 3 // matches coding_standard.ads
+        "editor.wordWrapColumn": 120,  // matches coding standard
+        "editor.tabSize": 3 // matches coding standard
     }
 }

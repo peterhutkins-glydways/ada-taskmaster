@@ -1,6 +1,6 @@
 --  Triggers.ads
-package Triggers
-   with SPARK_Mode
+package Triggers with
+  SPARK_Mode
 is
    protected type Task_Trigger is
       procedure Activate;

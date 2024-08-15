@@ -6,8 +6,8 @@ abstract project Taskmaster_Config is
    --   Coding Standards
    --   Compiler switches that begin "-gnaty" are style checks, documented 
    --     at https://gcc.gnu.org/onlinedocs/gnat_ugn/Style-Checking.html
-   Line_Length := "255";  --  255 is the default for "-gnatyM"
-   Tab_Size := "3";       --  3 is the Ada95 syntax standard
+   Line_Length := "120";     --  255 is the default for "-gnatyM"
+   Indentation := "3";       --  3 is the Ada95 syntax standard
 
    Alire_Host_OS := "linux";
 
@@ -27,7 +27,7 @@ abstract project Taskmaster_Config is
            ,"-gnatwv" -- (RPP04) Activate warnings on unassigned variables. Captures unassigned out parameters.
            ,"-gnatw.X" -- TEMPORARY: Disable warnings for No_Exception_Propagation. TEMPORARY to allow compilation until all exceptions are handled.
            ,"-gnatwl" -- Activate warnings for suspictious elaboration pragmas.
-           ,"-gnaty" & Tab_Size  -- (STL02) Specify indentation level
+           ,"-gnaty" & Indentation  -- (STL02) Specify indentation level
            ,"-gnatya" -- (STL03) Check attribute casing
            ,"-gnatyA" -- (STL06) Use of array index numbers in array attributes
            ,"-gnatyB" -- Check Boolean operators

@@ -11,7 +11,8 @@ procedure Last_Chance_Handler (Source_Location : System.Address; Line : Integer)
 
    pragma Style_Checks ("-s"); -- suppress "subprogram body has no previous spec" for internal function
    function Peek (Addr : System.Address) return Character is
-      C : Character with Address => Addr;
+      C : Character with
+        Address => Addr;
    begin
       return C;
    end Peek;

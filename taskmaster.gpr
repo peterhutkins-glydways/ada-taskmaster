@@ -54,4 +54,16 @@ project Taskmaster is
       for Artifacts (".") use ("share");
    end Install;
 
+   -- When changing the pretty-printer configuration, please restart the IDE Extensions
+   package Pretty_Printer is
+      for Default_Switches ("ada") use
+        ("--layout=default",
+         "--max-line-length=" & Taskmaster_Config.Line_Length,
+         "--indentation=" & Taskmaster_Config.Indentation,
+         "--no-align-modes",
+         "--no-separate-is",
+         "--vertical-named-aggregates",
+         "--comments-unchanged");
+   end Pretty_Printer;
+
 end Taskmaster;
